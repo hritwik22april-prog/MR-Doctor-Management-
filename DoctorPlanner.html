@@ -3,100 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MR Master - 87 Doctors Planner</title>
+    <title>MR Master - Flexible Planner</title>
     <style>
-        :root { --primary: #1a73e8; --secondary: #28a745; --bg: #f8f9fa; --accent: #d93025; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); margin: 0; padding: 10px; }
-        .header { background: var(--primary); color: white; padding: 20px; text-align: center; border-radius: 0 0 20px 20px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        select { width: 100%; padding: 15px; border-radius: 12px; border: 2px solid var(--primary); font-size: 16px; margin-bottom: 20px; background: white; outline: none; }
-        .card { background: white; border-radius: 15px; padding: 18px; margin-bottom: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border-left: 8px solid var(--secondary); position: relative; }
-        .spec-tag { position: absolute; top: 15px; right: 15px; background: #e8f0fe; color: #1967d2; padding: 5px 10px; border-radius: 6px; font-size: 11px; font-weight: bold; text-transform: uppercase; }
-        h3 { margin: 0 0 8px 0; color: #202124; font-size: 18px; width: 70%; }
-        .loc-info { color: #5f6368; font-size: 14px; margin-bottom: 12px; display: flex; align-items: center; }
-        .med-box { background: #fff8e1; border: 1px solid #ffe082; padding: 12px; border-radius: 10px; margin-top: 10px; }
-        .med-label { color: #d32f2f; font-weight: bold; font-size: 12px; display: block; margin-bottom: 5px; text-transform: uppercase; }
-        .med-list { color: #3c4043; font-size: 14px; line-height: 1.4; font-weight: 500; }
-        .btn-call { display: block; text-align: center; background: var(--secondary); color: white; padding: 12px; border-radius: 10px; text-decoration: none; margin-top: 15px; font-weight: bold; transition: 0.3s; }
-        #loader { text-align: center; color: var(--primary); font-weight: bold; display: none; padding: 20px; }
+        :root { --primary: #1a73e8; --secondary: #34a853; --bg: #f4f6f9; --dark: #202124; --white: #ffffff; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 10px; }
+        
+        .header { background: #1a73e8; color: white; padding: 20px; text-align: center; border-radius: 0 0 20px 20px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        
+        /* Layer 1: Global Search */
+        .global-search-section { margin-bottom: 12px; }
+        .global-input { width: 100%; padding: 16px; border-radius: 12px; border: 2px solid var(--primary); font-size: 16px; box-sizing: border-box; outline: none; }
+
+        /* Layer 2: Independent Divisions */
+        .filter-division-box { background: #ffffff; padding: 15px; border-radius: 15px; border: 1px solid #dce1e8; margin-bottom: 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .division-label { grid-column: span 3; font-size: 11px; font-weight: bold; color: #5f6368; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
+        select { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ced4da; font-size: 13px; background: #f8f9fa; outline: none; cursor: pointer; color: #495057; }
+        select:focus { border-color: var(--primary); background: #fff; }
+
+        /* Results Display */
+        .status-bar { text-align: center; font-size: 13px; font-weight: bold; color: #1a73e8; margin-bottom: 12px; background: #e8f0fe; padding: 8px; border-radius: 8px; }
+
+        .card { background: var(--white); border-radius: 15px; padding: 18px; margin-bottom: 15px; border-left: 8px solid var(--secondary); position: relative; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .spec-tag { position: absolute; top: 15px; right: 15px; background: #e8f0fe; color: #1967d2; padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: bold; text-transform: uppercase; }
+        
+        h3 { margin: 0 0 10px 0; color: var(--dark); font-size: 18px; width: 70%; line-height: 1.2; }
+        .info-item { font-size: 14px; color: #5f6368; margin-bottom: 5px; display: flex; }
+        .info-label { font-weight: bold; color: #3c4043; width: 85px; flex-shrink: 0; }
+        .day-val { color: #d93025; font-weight: bold; }
+        .area-blue { color: #1a73e8; font-weight: bold; }
+
+        .promo-box { background: #fffdf2; border: 1px solid #ffe082; padding: 12px; border-radius: 10px; margin-top: 15px; }
+        .promo-label { color: #856404; font-weight: bold; font-size: 11px; text-transform: uppercase; display: block; margin-bottom: 4px; }
+        .promo-list { font-size: 13px; color: #3c4043; line-height: 1.4; font-weight: 500; }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <h2 style="margin:0;">Nadia Zone Planner</h2>
-    <p style="margin:5px 0 0 0; opacity:0.9;">Total Database: 87 Doctors</p>
+    <h2 style="margin:0;">Nadia Master Planner</h2>
+    <p style="margin:5px 0 0 0; opacity:0.9; font-size: 14px;">104 Doctors | Smart Visit System</p>
 </div>
 
-<select id="routeSelect" onchange="fetchData()">
-    <option value="">-- SELECT VISIT ROUTE --</option>
-    <option value="Krishnanagar">Krishnanagar (HQ)</option>
-    <option value="Chapra">Chapra & Ghurni</option>
-    <option value="Palashi">Palashi & Debagram</option>
-    <option value="Nabadwip">Nabadwip Route</option>
-    <option value="Mayapur">Mayapur Route</option>
-    <option value="Dhubulia">Dhubulia Route</option>
-</select>
+<div class="global-search-section">
+    <input type="text" id="globalSearch" class="global-input" placeholder="Search by Doctor Name..." onkeyup="filterSystem()">
+</div>
 
-<div id="loader">🔄 Syncing with Cloud...</div>
-<div id="container"></div>
+<div class="filter-division-box">
+    <div class="division-label">Select Filters (Optional)</div>
+    <select id="routeSelect" onchange="filterSystem()">
+        <option value="">-- ROUTE --</option>
+        <option value="Krishnanagar">Krishnanagar</option>
+        <option value="Nabadwip">Nabadwip</option>
+        <option value="Chapra">Chapra</option>
+        <option value="Dhubulia">Dhubulia</option>
+        <option value="Bethuadahari">Bethuadahari</option>
+        <option value="Palashi">Palashi</option>
+    </select>
+    <select id="specSelect" onchange="filterSystem()">
+        <option value="">-- SPEC --</option>
+        <option value="GP">GP</option>
+        <option value="ORTHO">Ortho</option>
+        <option value="NEURO">Neuro</option>
+        <option value="DENTIST">Dentist</option>
+    </select>
+    <select id="daySelect" onchange="filterSystem()">
+        <option value="">-- DAY --</option>
+        <option value="Monday">Monday</option>
+        <option value="Tuesday">Tuesday</option>
+        <option value="Wednesday">Wednesday</option>
+        <option value="Thursday">Thursday</option>
+        <option value="Friday">Friday</option>
+        <option value="Saturday">Saturday</option>
+        <option value="Sunday">Sunday</option>
+    </select>
+</div>
+
+<div id="status" class="status-bar">Connecting to Database...</div>
+<div id="results"></div>
 
 <script>
-    const SHEET_URL = "https://script.google.com/macros/s/AKfycbwC3e47Yhqw_XlSVAWRmHzu7xUA1VFfYlsFmonFpoUcu0g_bH4e6vnHl8xbXYoZ7fWBGg/exec";
+    // Core Data with Specific Visit Days
+    const coreList = [
+        { name: "Dr. Jidesh Bain", spec: "GP", city: "Krishnanagar", area: "Shaktinagar Hospital", chamber: "N/A", day: "Thursday", time: "10:00 AM" },
+        { name: "Dr. Amal Chandra Biswas", spec: "GP", city: "Krishnanagar", area: "Shaktinagar", chamber: "Kanak Pharmacy", day: "Thursday", time: "N/A" },
+        { name: "Dr. P.K. Paul", spec: "GP", city: "Krishnanagar", area: "Kurchipota", chamber: "N/A", day: "Thursday", time: "N/A" },
+        { name: "Dr. Nabarun Banerjee", spec: "GP", city: "Krishnanagar", area: "Talpukur Road", chamber: "N/A", day: "Thursday", time: "N/A" },
+        { name: "Dr. Bibek Das", spec: "GP", city: "Krishnanagar", area: "Talpukur Road", chamber: "N/A", day: "Thursday", time: "N/A" },
+        { name: "Dr. Binod Das", spec: "GP", city: "Krishnanagar", area: "Patra Market", chamber: "Balaji Pharmacy", day: "Thursday", time: "N/A" },
+        { name: "Dr. Lebu Sarkar", spec: "ORTHO", city: "Krishnanagar", area: "", chamber: "N/A", day: "Friday", time: "N/A" },
+        { name: "Dr. Abhishek Chaki", spec: "GP", city: "Krishnanagar", area: "Talpukur Road", chamber: "N/A", day: "Thursday", time: "N/A" },
+        { name: "Dr. Biswajit Sarkar", spec: "GP", city: "Krishnanagar", area: "Talpukur Road", chamber: "N/A", day: "Thursday", time: "N/A" },
+        { name: "Dr. Rahul Ghosh", spec: "GP", city: "Krishnanagar", area: "Talpukur Road", chamber: "N/A", day: "Thursday", time: "N/A" },
+        { name: "Dr. Debabrata Dutta", spec: "GP", city: "Krishnanagar", area: "Shaktinagar", chamber: "Shaktinagar Play Ground", day: "Thursday", time: "N/A" },
+        { name: "Dr. Arindam Bhattacharjee", spec: "GP", city: "Krishnanagar", area: "Patra Market", chamber: "Kundu Pharmacy", day: "Thursday", time: "N/A" },
+        { name: "Dr. N. Mondal", spec: "GP", city: "Krishnanagar", area: "Nediarpara", chamber: "Lifeline Pharmacy", day: "Thursday", time: "N/A" },
+        { name: "Dr. A.P. Jadav", spec: "GP", city: "Krishnanagar", area: "Talpukur Road", chamber: "N/A", day: "Thursday", time: "N/A" },
+        { name: "Dr. Pijush Kanti Paul", spec: "GP", city: "Krishnanagar", area: "Talpukur Road", chamber: "Sreelekha Polly Clinic", day: "Thursday", time: "N/A" },
+        { name: "Dr. C.R. Das", spec: "GP", city: "Krishnanagar", area: "Chowrasta", chamber: "N/A", day: "Thursday", time: "Evening" },
+        { name: "Dr. Ratnadeep Das", spec: "DENTIST", city: "Krishnanagar", area: "Bagdipara", chamber: "N/A", day: "Thursday", time: "N/A" }
+    ];
 
-    // Medicine mapping based on your final list
-    const medGuide = {
-        "NEURO": "Prejuren-MNT, Prejuren-D, Gabaren-NT, Rotoxib-90, Tinicort-6, Ubicobal-Forte",
-        "ORTHO": "Rotoxib-TH4, Ufinac-SP, Calcilime-Flex, Calcilime-Plus, Prejuren-MNT, Calcilime D3 60K",
-        "GP": "Ufinac-P, Rotoxib-90, Rotoxib-TH4, Prejuren-MNT, Gerdzen-40, Esizen-10, Calcilime D3 60K",
-        "CP": "Tinicort-6, Gerdzen-40, Somizole-D, Calcilime D3 60K, Esizen-10",
-        "RMP": "Ufinac-P, Rotoxib-90, Rotoxib-TH4, Gerdzen-40, Calcilime D3 60K"
+    const medFocus = {
+        "GP": "Ufinac-P, Rotoxib-90, Gerdzen-40, Esizen-10, Calcilime D3 60K",
+        "ORTHO": "Rotoxib-TH4, Ufinac-SP, Calcilime-Flex, Calcilime D3 60K",
+        "NEURO": "Prejuren-MNT, Prejuren-D, Gabaren-NT, Tinicort-6",
+        "DENTIST": "Ufinac-P, Rotoxib-90, Tinicort-6"
     };
 
-    async function fetchData() {
-        const route = document.getElementById('routeSelect').value;
-        const container = document.getElementById('container');
-        const loader = document.getElementById('loader');
-        
-        if(!route) { container.innerHTML = ''; return; }
+    let fullDatabase = [...coreList];
 
-        loader.style.display = 'block';
-        container.innerHTML = '';
-
+    async function fetchCloud() {
+        const URL = "https://script.google.com/macros/s/AKfycbwC3e47Yhqw_XlSVAWRmHzu7xUA1VFfYlsFmonFpoUcu0g_bH4e6vnHl8xbXYoZ7fWBGg/exec";
         try {
-            const response = await fetch(SHEET_URL);
-            const data = await response.json();
-            loader.style.display = 'none';
-
-            const filtered = data.filter(d => d.route.trim().toLowerCase() === route.toLowerCase());
-
-            if(filtered.length === 0) {
-                container.innerHTML = '<p style="text-align:center; padding:20px;">No doctors found in this route.</p>';
-                return;
-            }
-
-            filtered.forEach(doc => {
-                const speciality = doc.spec ? doc.spec.toUpperCase() : "GP";
-                const medicine = medGuide[speciality] || medGuide["GP"];
-
-                container.innerHTML += `
-                    <div class="card">
-                        <span class="spec-tag">${speciality}</span>
-                        <h3>${doc.name}</h3>
-                        <div class="loc-info">📍 ${doc.loc || 'Local Area'}</div>
-                        <div class="med-box">
-                            <span class="med-label">Promotion Focus:</span>
-                            <div class="med-list">${medicine}</div>
-                        </div>
-                        <a href="tel:${doc.phone}" class="btn-call">CALL DOCTOR</a>
-                    </div>
-                `;
-            });
-        } catch (error) {
-            loader.style.display = 'none';
-            container.innerHTML = '<p style="text-align:center; color:red;">Connection Error!</p>';
+            const res = await fetch(URL);
+            const cloudData = await res.json();
+            const cloudFormatted = cloudData.map(d => ({
+                name: d.name,
+                spec: d.spec || "GP",
+                city: d.route || "Other",
+                area: "",
+                chamber: d.loc || "Details N/A",
+                day: d.day || "Update Soon",
+                time: ""
+            }));
+            fullDatabase = [...coreList, ...cloudFormatted];
+            filterSystem();
+        } catch(e) {
+            filterSystem();
         }
     }
-</script>
 
+    function filterSystem() {
+        const nameVal = document.getElementById('globalSearch').value.toLowerCase();
+        const routeVal = document.getElementById('routeSelect').value.toLowerCase();
+        const specVal = document.getElementById('specSelect').value.toUpperCase();
+        const dayVal = document.getElementById('daySelect').value.toLowerCase();
+
+        const filtered = fullDatabase.filter(doc => {
+            const matchName = doc.name.toLowerCase().includes(nameVal);
+            const matchRoute = !routeVal || doc.city.toLowerCase().includes(routeVal);
+            const matchSpec = !specVal || doc.spec.toUpperCase().includes(specVal);
+            const matchDay = !dayVal || doc.day.toLowerCase().includes(dayVal);
+            
+            return matchName && matchRoute && matchSpec && matchDay;
+        });
+
+        document.getElementById('status').innerText = `Found ${filtered.length} Doctor(s) Match Your Filter`;
+        renderDisplay(filtered);
+    }
+
+    function renderDisplay(data) {
+        const container = document.getElementById('results');
+        container.innerHTML = '';
+
+        data.forEach(doc => {
+            const spec = doc.spec.toUpperCase();
+            container.innerHTML += `
+                <div class="card">
+                    <span class="spec-tag">${spec}</span>
+                    <h3>${doc.name}</h3>
+                    <div class="info-item"><span class="info-label">City:</span> ${doc.city}</div>
+                    <div class="info-item"><span class="info-label">Area:</span> ${doc.area ? `<span class="area-blue">${doc.area}</span>` : `<span style="color:#bdc1c6">Area Pending</span>`}</div>
+                    <div class="info-item"><span class="info-label">Chamber:</span> ${doc.chamber}</div>
+                    <div class="info-item"><span class="info-label">Visit Day:</span> <span class="day-val">${doc.day}</span></div>
+                    
+                    <div class="promo-box">
+                        <span class="promo-label">Promotion Guidelines:</span>
+                        <div class="promo-list">${medFocus[spec] || medFocus["GP"]}</div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    window.onload = fetchCloud;
+</script>
 </body>
 </html>
